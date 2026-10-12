@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -eu
 
+source "$(dirname "$(readlink -f "$0")")/lib/common.sh"
+
 OUTPUT_DIR="${HOME}/aif_bags/control_$(date +%Y%m%d_%H%M%S)${1:+_$1}"
 mkdir -p "$(dirname "${OUTPUT_DIR}")"
 
@@ -33,4 +35,4 @@ TOPICS=(
   /tf_static
 )
 
-ros2 bag record -o "${OUTPUT_DIR}" "${TOPICS[@]}"
+record_bag "${TOPICS[@]}"
